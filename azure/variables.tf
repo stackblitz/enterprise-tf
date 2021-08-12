@@ -26,7 +26,7 @@ variable "subnet_opts" {
   default = {
     name                 = "my-subnet"
     virtual_network_name = "my-vnet"
-    resource_group_name  = "my-resource-group"
+    resource_group_name  = "subnet-resource-group"
   }
 }
 
