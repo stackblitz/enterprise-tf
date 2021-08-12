@@ -88,18 +88,6 @@ resource "azurerm_network_security_group" "main" {
     access                     = "Allow"
     direction                  = "Inbound"
     name                       = "kotsadm"
-    priority                   = 130
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    source_address_prefix      = "*"
-    destination_port_range     = "8080"
-    destination_address_prefix = var.vpn_available ? "${azurerm_network_interface.main.private_ip_address}" : "*"
-  }
-
-  security_rule {
-    access                     = "Allow"
-    direction                  = "Inbound"
-    name                       = "grafana"
     priority                   = 140
     protocol                   = "Tcp"
     source_port_range          = "*"
@@ -111,7 +99,7 @@ resource "azurerm_network_security_group" "main" {
   security_rule {
     access                     = "Allow"
     direction                  = "Inbound"
-    name                       = "nodeport"
+    name                       = "grafana"
     priority                   = 150
     protocol                   = "Tcp"
     source_port_range          = "*"
