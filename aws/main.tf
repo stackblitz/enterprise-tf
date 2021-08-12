@@ -93,16 +93,6 @@ resource "aws_security_group" "main" {
   }
 }
 
-# resource "aws_network_interface" "main" {
-#   subnet_id       = var.subnet_id
-#   private_ips     = [var.private_ip]
-#   security_groups = [aws_security_group.main.id]
-
-#   tags = {
-#     Name = "${var.prefix}-stackblitz"
-#   }
-# }
-
 resource "aws_eip" "main" {
   count = var.create_public_ip ? 1 : 0
   vpc   = true
@@ -123,24 +113,12 @@ resource "aws_instance" "main" {
 
   vpc_security_group_ids = [aws_security_group.main.id]
 
-  # network_interface {
-  #   network_interface_id = aws_network_interface.main.id
-  #   device_index         = 0
-  # }
-
   root_block_device {
     volume_size = 200
     volume_type = "gp2"
   }
 
-
   tags = {
     Name = "${var.prefix}-stackblitz"
   }
 }
-
-# resource "aws_network_interface_attachment" "main" {
-#   instance_id          = aws_instance.main.id
-#   network_interface_id = aws_network_interface.main.id
-#   device_index         = 1
-# }
